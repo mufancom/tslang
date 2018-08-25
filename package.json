@@ -4,6 +4,7 @@
   "description": "TypeScript Language Type Utilities.",
   "license": "MIT",
   "types": "library/index.d.ts",
+  "main": "library/index.js",
   "scripts": {
     "lint": "yarn tslint -p library && yarn tslint -p test",
     "test": "yarn tsc -p library && yarn tsc -p test"
