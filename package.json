@@ -5,6 +5,7 @@
   "license": "MIT",
   "types": "library/index.d.ts",
   "scripts": {
+    "lint": "yarn tslint -p library && yarn tslint -p test",
     "test": "yarn tsc -p library && yarn tsc -p test"
   },
   "files": [
