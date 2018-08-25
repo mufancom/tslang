@@ -10,6 +10,12 @@ export type KeyOfValueNotWithType<TObject extends object, TValue> = {
   [K in keyof TObject]: TObject[K] extends TValue ? never : K
 }[keyof TObject];
 
+// Extract values
+
+export type ValueWithType<TObject extends object, TValue> = {
+  [K in keyof TObject]: TObject[K] extends TValue ? TObject[K] : never
+}[keyof TObject];
+
 // Keep or omit values by keys
 
 export type KeepValueOfKey<

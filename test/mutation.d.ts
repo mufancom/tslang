@@ -8,9 +8,13 @@ import {
   KeyOfValueWithType,
   OmitValueOfKey,
   OmitValueWithType,
+  Primitive,
+  ValueWithType,
 } from '../library';
 
-type Foo = string;
+interface TestObject {
+  type: 'test-object';
+}
 
 type _ =
   | AssertTrue<
@@ -18,6 +22,12 @@ type _ =
     >
   | AssertTrue<
       IsEqual<KeyOfValueNotWithType<{foo: string; bar: number}, string>, 'bar'>
+    >
+  | AssertTrue<
+      IsEqual<
+        ValueWithType<{foo: string; bar: number; pia: TestObject}, object>,
+        TestObject
+      >
     >
   | AssertTrue<
       IsEqual<KeepValueOfKey<{foo: string; bar: number}, 'bar'>, {bar: number}>
