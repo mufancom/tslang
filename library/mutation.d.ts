@@ -20,14 +20,14 @@ export type ValueWithType<TObject extends object, TValue> = {
 
 export type KeepValueOfKey<
   TObject extends object,
-  TKey extends keyof TObject
+  TKey
 > = TObject extends object
   ? Pick<TObject, Extract<keyof TObject, TKey>>
   : never;
 
 export type OmitValueOfKey<
   TObject extends object,
-  TKey extends keyof TObject
+  TKey
 > = TObject extends object
   ? Pick<TObject, Exclude<keyof TObject, TKey>>
   : never;
