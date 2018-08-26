@@ -9,6 +9,7 @@ import {
   OmitValueOfKey,
   OmitValueWithType,
   Primitive,
+  ValueNotWithType,
   ValueWithType,
 } from '../library';
 
@@ -26,6 +27,15 @@ type _ =
   | AssertTrue<
       IsEqual<
         ValueWithType<{foo: string; bar: number; pia: TestObject}, object>,
+        TestObject
+      >
+    >
+  | AssertTrue<
+      IsEqual<
+        ValueNotWithType<
+          {foo: string; bar: number; pia: TestObject},
+          string | number
+        >,
         TestObject
       >
     >
