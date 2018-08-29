@@ -2,23 +2,60 @@ import {Primitive} from './types';
 
 // Extract keys
 
-export type KeyOfValueWithType<TObject extends object, TValue> = {
-  [K in keyof TObject]: TObject[K] extends TValue ? K : never
-}[keyof TObject];
+type __KeyOfValueWithType<
+  TObject extends object,
+  TKey extends keyof TObject,
+  TValue
+> = TKey extends keyof TObject
+  ? TObject[TKey] extends TValue ? TKey : never
+  : never;
 
-export type KeyOfValueNotWithType<TObject extends object, TValue> = {
-  [K in keyof TObject]: TObject[K] extends TValue ? never : K
-}[keyof TObject];
+export type KeyOfValueWithType<
+  TObject extends object,
+  TValue
+> = __KeyOfValueWithType<TObject, keyof TObject, TValue>;
+
+type __KeyOfValueNotWithType<
+  TObject extends object,
+  TKey extends keyof TObject,
+  TValue
+> = TKey extends keyof TObject
+  ? TObject[TKey] extends TValue ? never : TKey
+  : never;
+
+export type KeyOfValueNotWithType<
+  TObject extends object,
+  TValue
+> = __KeyOfValueNotWithType<TObject, keyof TObject, TValue>;
 
 // Extract values
 
-export type ValueWithType<TObject extends object, TValue> = {
-  [K in keyof TObject]: TObject[K] extends TValue ? TObject[K] : never
-}[keyof TObject];
+type __ValueWithType<
+  TObject extends object,
+  TKey extends keyof TObject,
+  TValue
+> = TKey extends keyof TObject
+  ? TObject[TKey] extends TValue ? TObject[TKey] : never
+  : never;
 
-export type ValueNotWithType<TObject extends object, TValue> = {
-  [K in keyof TObject]: TObject[K] extends TValue ? never : TObject[K]
-}[keyof TObject];
+export type ValueWithType<TObject extends object, TValue> = __ValueWithType<
+  TObject,
+  keyof TObject,
+  TValue
+>;
+
+type __ValueNotWithType<
+  TObject extends object,
+  TKey extends keyof TObject,
+  TValue
+> = TKey extends keyof TObject
+  ? TObject[TKey] extends TValue ? never : TObject[TKey]
+  : never;
+
+export type ValueNotWithType<
+  TObject extends object,
+  TValue
+> = __ValueNotWithType<TObject, keyof TObject, TValue>;
 
 // Keep or omit values by keys
 
