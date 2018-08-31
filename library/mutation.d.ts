@@ -57,6 +57,16 @@ export type ValueNotWithType<
   TValue
 > = __ValueNotWithType<TObject, keyof TObject, TValue>;
 
+export type ValueOfKey<
+  TObject extends object,
+  TKey extends keyof TObject
+> = TKey extends keyof TObject ? TObject[TKey] : never;
+
+export type ValueNotOfKey<
+  TObject extends object,
+  TKey extends keyof TObject
+> = ValueOfKey<TObject, Exclude<keyof TObject, TKey>>;
+
 // Keep or omit values by keys
 
 export type KeepValueOfKey<

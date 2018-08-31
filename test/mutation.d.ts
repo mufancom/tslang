@@ -9,7 +9,9 @@ import {
   OmitValueOfKey,
   OmitValueWithType,
   Primitive,
+  ValueNotOfKey,
   ValueNotWithType,
+  ValueOfKey,
   ValueWithType,
 } from '../library';
 
@@ -38,6 +40,10 @@ type _ =
         >,
         TestObject
       >
+    >
+  | AssertTrue<IsEqual<ValueOfKey<{foo: string; bar: number}, 'foo'>, string>>
+  | AssertTrue<
+      IsEqual<ValueNotOfKey<{foo: string; bar: number}, 'bar'>, string>
     >
   | AssertTrue<
       IsEqual<KeepValueOfKey<{foo: string; bar: number}, 'bar'>, {bar: number}>
