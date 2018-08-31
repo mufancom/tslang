@@ -5,3 +5,7 @@ declare class __Type<T> {
 }
 
 export type Nominal<T, TName> = T & __Type<TName>;
+
+export class EmptyObjectPatch {
+  protected _?: never;
+}
