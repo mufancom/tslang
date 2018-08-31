@@ -1,6 +1,6 @@
 {
   "name": "tslang",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "TypeScript Language Type Utilities.",
   "license": "MIT",
   "types": "library/index.d.ts",
