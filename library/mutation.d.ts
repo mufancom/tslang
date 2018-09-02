@@ -1,3 +1,4 @@
+import {IsEqual} from './comparison';
 import {Primitive} from './types';
 
 // Extract keys
@@ -94,6 +95,10 @@ export type OmitValueWithType<TObject extends object, TValue> = {
 };
 
 // Miscellaneous
+
+export type Default<T, TDefault> = IsEqual<T, never> extends true
+  ? TDefault
+  : T;
 
 type __DeepReadonly<T> = {readonly [P in keyof T]: DeepReadonly<T[P]>};
 

@@ -1,6 +1,7 @@
 import {
   AssertTrue,
   DeepReadonly,
+  Default,
   IsEqual,
   KeepValueOfKey,
   KeepValueWithType,
@@ -63,6 +64,8 @@ type _ =
         {foo: string}
       >
     >
+  | AssertTrue<IsEqual<Default<string, number>, string>>
+  | AssertTrue<IsEqual<Default<never, number>, number>>
   | AssertTrue<
       IsEqual<
         DeepReadonly<{foo: {yo: string}; bar: number}>,
