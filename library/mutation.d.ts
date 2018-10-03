@@ -94,6 +94,14 @@ export type OmitValueWithType<TObject extends object, TValue> = {
   [K in KeyOfValueNotWithType<TObject, TValue>]: TObject[K]
 };
 
+// Function
+
+export type ParamsType<T extends (...args: any[]) => any> = T extends (
+  ...args: infer TParams
+) => any
+  ? TParams
+  : never;
+
 // Miscellaneous
 
 export type Default<T, TDefault> = IsEqual<T, never> extends true

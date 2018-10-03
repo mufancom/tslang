@@ -9,6 +9,7 @@ import {
   KeyOfValueWithType,
   OmitValueOfKey,
   OmitValueWithType,
+  ParamsType,
   Primitive,
   ValueNotOfKey,
   ValueNotWithType,
@@ -63,6 +64,9 @@ type _ =
         OmitValueWithType<{foo: string; bar: number}, number>,
         {foo: string}
       >
+    >
+  | AssertTrue<
+      IsEqual<ParamsType<(foo: string, bar: number) => any>, [string, number]>
     >
   | AssertTrue<IsEqual<Default<string, number>, string>>
   | AssertTrue<IsEqual<Default<never, number>, number>>
