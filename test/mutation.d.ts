@@ -9,8 +9,8 @@ import {
   KeyOfValueWithType,
   OmitValueOfKey,
   OmitValueWithType,
-  ParamsType,
   Primitive,
+  PromiseType,
   ValueNotOfKey,
   ValueNotWithType,
   ValueOfKey,
@@ -65,11 +65,9 @@ type _ =
         {foo: string}
       >
     >
-  | AssertTrue<
-      IsEqual<ParamsType<(foo: string, bar: number) => any>, [string, number]>
-    >
   | AssertTrue<IsEqual<Default<string, number>, string>>
   | AssertTrue<IsEqual<Default<never, number>, number>>
+  | AssertTrue<IsEqual<PromiseType<Promise<number>>, number>>
   | AssertTrue<
       IsEqual<
         DeepReadonly<{foo: {yo: string}; bar: number}>,
