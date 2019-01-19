@@ -29,6 +29,32 @@ export type KeyOfValueNotWithType<
   TValue
 > = __KeyOfValueNotWithType<TObject, keyof TObject, TValue>;
 
+type __KeyOfValueContainingType<
+  TObject extends object,
+  TKey extends keyof TObject,
+  TValue
+> = TKey extends keyof TObject
+  ? TValue extends TObject[TKey] ? TKey : never
+  : never;
+
+export type KeyOfValueContainingType<
+  TObject extends object,
+  TValue
+> = __KeyOfValueContainingType<TObject, keyof TObject, TValue>;
+
+type __KeyOfValueNotContainingType<
+  TObject extends object,
+  TKey extends keyof TObject,
+  TValue
+> = TKey extends keyof TObject
+  ? TValue extends TObject[TKey] ? never : TKey
+  : never;
+
+export type KeyOfValueNotContainingType<
+  TObject extends object,
+  TValue
+> = __KeyOfValueNotContainingType<TObject, keyof TObject, TValue>;
+
 // Extract values
 
 type __ValueWithType<
@@ -57,6 +83,32 @@ export type ValueNotWithType<
   TObject extends object,
   TValue
 > = __ValueNotWithType<TObject, keyof TObject, TValue>;
+
+type __ValueContainingType<
+  TObject extends object,
+  TKey extends keyof TObject,
+  TValue
+> = TKey extends keyof TObject
+  ? TValue extends TObject[TKey] ? TObject[TKey] : never
+  : never;
+
+export type ValueContainingType<
+  TObject extends object,
+  TValue
+> = __ValueContainingType<TObject, keyof TObject, TValue>;
+
+type __ValueNotContainingType<
+  TObject extends object,
+  TKey extends keyof TObject,
+  TValue
+> = TKey extends keyof TObject
+  ? TValue extends TObject[TKey] ? never : TObject[TKey]
+  : never;
+
+export type ValueNotContainingType<
+  TObject extends object,
+  TValue
+> = __ValueNotContainingType<TObject, keyof TObject, TValue>;
 
 export type ValueOfKey<
   TObject extends object,
@@ -93,6 +145,21 @@ export type KeepValueWithType<TObject extends object, TValue> = {
 export type OmitValueWithType<TObject extends object, TValue> = {
   [K in KeyOfValueNotWithType<TObject, TValue>]: TObject[K]
 };
+
+export type KeepValueContainingType<TObject extends object, TValue> = {
+  [K in KeyOfValueContainingType<TObject, TValue>]: TObject[K]
+};
+
+export type OmitValueContainingType<TObject extends object, TValue> = {
+  [K in KeyOfValueNotContainingType<TObject, TValue>]: TObject[K]
+};
+
+// Optionalize values
+
+export type OptionalizeUndefined<TObject extends object> = Partial<
+  KeepValueContainingType<TObject, undefined>
+> &
+  OmitValueContainingType<TObject, undefined>;
 
 // Miscellaneous
 

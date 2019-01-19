@@ -15,6 +15,13 @@ import {
   ValueNotWithType,
   ValueOfKey,
   ValueWithType,
+  OptionalizeUndefined,
+  KeyOfValueContainingType,
+  KeyOfValueNotContainingType,
+  ValueContainingType,
+  ValueNotContainingType,
+  KeepValueContainingType,
+  OmitValueContainingType,
 } from '../library';
 
 interface TestObject {
@@ -23,10 +30,31 @@ interface TestObject {
 
 type _ =
   | AssertTrue<
-      IsEqual<KeyOfValueWithType<{foo: string; bar: number}, string>, 'foo'>
+      IsEqual<
+        KeyOfValueWithType<{foo: string; bar: number}, string | object>,
+        'foo'
+      >
     >
   | AssertTrue<
-      IsEqual<KeyOfValueNotWithType<{foo: string; bar: number}, string>, 'bar'>
+      IsEqual<
+        KeyOfValueNotWithType<{foo: string; bar: number}, string | object>,
+        'bar'
+      >
+    >
+  | AssertTrue<
+      IsEqual<
+        KeyOfValueContainingType<{foo: string | object; bar: number}, string>,
+        'foo'
+      >
+    >
+  | AssertTrue<
+      IsEqual<
+        KeyOfValueNotContainingType<
+          {foo: string | object; bar: number},
+          string
+        >,
+        'bar'
+      >
     >
   | AssertTrue<
       IsEqual<
@@ -43,6 +71,24 @@ type _ =
         TestObject
       >
     >
+  | AssertTrue<
+      IsEqual<
+        ValueContainingType<
+          {foo: string; bar: number; pia: TestObject},
+          TestObject & {yo: 'ha'}
+        >,
+        TestObject
+      >
+    >
+  | AssertTrue<
+      IsEqual<
+        ValueNotContainingType<
+          {foo: string; bar: number; pia: TestObject},
+          string & number
+        >,
+        TestObject
+      >
+    >
   | AssertTrue<IsEqual<ValueOfKey<{foo: string; bar: number}, 'foo'>, string>>
   | AssertTrue<
       IsEqual<ValueNotOfKey<{foo: string; bar: number}, 'bar'>, string>
@@ -55,14 +101,32 @@ type _ =
     >
   | AssertTrue<
       IsEqual<
-        KeepValueWithType<{foo: string; bar: number}, number>,
+        KeepValueWithType<{foo: string; bar: number}, number | object>,
         {bar: number}
       >
     >
   | AssertTrue<
       IsEqual<
-        OmitValueWithType<{foo: string; bar: number}, number>,
+        OmitValueWithType<{foo: string; bar: number}, number | object>,
         {foo: string}
+      >
+    >
+  | AssertTrue<
+      IsEqual<
+        KeepValueContainingType<{foo: string; bar: number | object}, number>,
+        {bar: number | object}
+      >
+    >
+  | AssertTrue<
+      IsEqual<
+        OmitValueContainingType<{foo: string; bar: number | object}, number>,
+        {foo: string}
+      >
+    >
+  | AssertTrue<
+      IsEqual<
+        OptionalizeUndefined<{foo: string; bar: string | undefined}>,
+        {foo: string; bar?: string | undefined}
       >
     >
   | AssertTrue<IsEqual<Default<string, number>, string>>
