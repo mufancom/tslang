@@ -1,8 +1,8 @@
-// tslint:disable:class-name variable-name
+// tslint:disable:class-name variable-name interface-over-type-literal
 
-declare class __Type<T> {
-  protected _: T;
-}
+type __Type<T> = {
+  __type: T;
+};
 
 export type Nominal<T, TName> = T & __Type<TName>;
 
