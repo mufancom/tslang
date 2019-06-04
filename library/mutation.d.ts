@@ -7,8 +7,12 @@ type __KeyOfValueWithType<
   TObject extends object,
   TKey extends keyof TObject,
   TValue
-> = TKey extends keyof TObject
-  ? TObject[TKey] extends TValue ? TKey : never
+> = TObject extends object
+  ? TKey extends keyof TObject
+    ? TObject[TKey] extends TValue
+      ? TKey
+      : never
+    : never
   : never;
 
 export type KeyOfValueWithType<
@@ -20,8 +24,12 @@ type __KeyOfValueNotWithType<
   TObject extends object,
   TKey extends keyof TObject,
   TValue
-> = TKey extends keyof TObject
-  ? TObject[TKey] extends TValue ? never : TKey
+> = TObject extends object
+  ? TKey extends keyof TObject
+    ? TObject[TKey] extends TValue
+      ? never
+      : TKey
+    : never
   : never;
 
 export type KeyOfValueNotWithType<
@@ -33,8 +41,12 @@ type __KeyOfValueContainingType<
   TObject extends object,
   TKey extends keyof TObject,
   TValue
-> = TKey extends keyof TObject
-  ? TValue extends TObject[TKey] ? TKey : never
+> = TObject extends object
+  ? TKey extends keyof TObject
+    ? TValue extends TObject[TKey]
+      ? TKey
+      : never
+    : never
   : never;
 
 export type KeyOfValueContainingType<
@@ -46,8 +58,12 @@ type __KeyOfValueNotContainingType<
   TObject extends object,
   TKey extends keyof TObject,
   TValue
-> = TKey extends keyof TObject
-  ? TValue extends TObject[TKey] ? never : TKey
+> = TObject extends object
+  ? TKey extends keyof TObject
+    ? TValue extends TObject[TKey]
+      ? never
+      : TKey
+    : never
   : never;
 
 export type KeyOfValueNotContainingType<
@@ -61,8 +77,12 @@ type __ValueWithType<
   TObject extends object,
   TKey extends keyof TObject,
   TValue
-> = TKey extends keyof TObject
-  ? TObject[TKey] extends TValue ? TObject[TKey] : never
+> = TObject extends object
+  ? TKey extends keyof TObject
+    ? TObject[TKey] extends TValue
+      ? TObject[TKey]
+      : never
+    : never
   : never;
 
 export type ValueWithType<TObject extends object, TValue> = __ValueWithType<
@@ -75,8 +95,12 @@ type __ValueNotWithType<
   TObject extends object,
   TKey extends keyof TObject,
   TValue
-> = TKey extends keyof TObject
-  ? TObject[TKey] extends TValue ? never : TObject[TKey]
+> = TObject extends object
+  ? TKey extends keyof TObject
+    ? TObject[TKey] extends TValue
+      ? never
+      : TObject[TKey]
+    : never
   : never;
 
 export type ValueNotWithType<
@@ -88,8 +112,12 @@ type __ValueContainingType<
   TObject extends object,
   TKey extends keyof TObject,
   TValue
-> = TKey extends keyof TObject
-  ? TValue extends TObject[TKey] ? TObject[TKey] : never
+> = TObject extends object
+  ? TKey extends keyof TObject
+    ? TValue extends TObject[TKey]
+      ? TObject[TKey]
+      : never
+    : never
   : never;
 
 export type ValueContainingType<
@@ -101,8 +129,12 @@ type __ValueNotContainingType<
   TObject extends object,
   TKey extends keyof TObject,
   TValue
-> = TKey extends keyof TObject
-  ? TValue extends TObject[TKey] ? never : TObject[TKey]
+> = TObject extends object
+  ? TKey extends keyof TObject
+    ? TValue extends TObject[TKey]
+      ? never
+      : TObject[TKey]
+    : never
   : never;
 
 export type ValueNotContainingType<
@@ -113,7 +145,11 @@ export type ValueNotContainingType<
 export type ValueOfKey<
   TObject extends object,
   TKey extends keyof TObject
-> = TKey extends keyof TObject ? TObject[TKey] : never;
+> = TObject extends object
+  ? TKey extends keyof TObject
+    ? TObject[TKey]
+    : never
+  : never;
 
 export type ValueNotOfKey<
   TObject extends object,
@@ -124,35 +160,47 @@ export type ValueNotOfKey<
 
 export type KeepValueOfKey<
   TObject extends object,
-  TKey
+  TKey extends keyof TObject
 > = TObject extends object
   ? Pick<TObject, Extract<keyof TObject, TKey>>
   : never;
 
 export type OmitValueOfKey<
   TObject extends object,
-  TKey
+  TKey extends keyof TObject
 > = TObject extends object
   ? Pick<TObject, Exclude<keyof TObject, TKey>>
   : never;
 
 // Keep or omit values with given type
 
-export type KeepValueWithType<TObject extends object, TValue> = {
-  [K in KeyOfValueWithType<TObject, TValue>]: TObject[K]
-};
+export type KeepValueWithType<
+  TObject extends object,
+  TValue
+> = TObject extends object
+  ? {[K in KeyOfValueWithType<TObject, TValue>]: TObject[K]}
+  : never;
 
-export type OmitValueWithType<TObject extends object, TValue> = {
-  [K in KeyOfValueNotWithType<TObject, TValue>]: TObject[K]
-};
+export type OmitValueWithType<
+  TObject extends object,
+  TValue
+> = TObject extends object
+  ? {[K in KeyOfValueNotWithType<TObject, TValue>]: TObject[K]}
+  : never;
 
-export type KeepValueContainingType<TObject extends object, TValue> = {
-  [K in KeyOfValueContainingType<TObject, TValue>]: TObject[K]
-};
+export type KeepValueContainingType<
+  TObject extends object,
+  TValue
+> = TObject extends object
+  ? {[K in KeyOfValueContainingType<TObject, TValue>]: TObject[K]}
+  : never;
 
-export type OmitValueContainingType<TObject extends object, TValue> = {
-  [K in KeyOfValueNotContainingType<TObject, TValue>]: TObject[K]
-};
+export type OmitValueContainingType<
+  TObject extends object,
+  TValue
+> = TObject extends object
+  ? {[K in KeyOfValueNotContainingType<TObject, TValue>]: TObject[K]}
+  : never;
 
 // Optionalize values
 
@@ -176,5 +224,5 @@ type __DeepReadonly<T> = {readonly [P in keyof T]: DeepReadonly<T[P]>};
 export type DeepReadonly<T> = T extends Primitive
   ? T
   : T extends (infer U)[]
-    ? ReadonlyArray<__DeepReadonly<U>>
-    : __DeepReadonly<T>;
+  ? ReadonlyArray<__DeepReadonly<U>>
+  : __DeepReadonly<T>;
