@@ -22,6 +22,7 @@ import {
   ValueNotWithType,
   ValueOfKey,
   ValueWithType,
+  Intersection,
 } from '../library';
 
 interface TestObject {
@@ -137,4 +138,7 @@ type _ =
         DeepReadonly<{foo: {yo: string}; bar: number}>,
         {readonly foo: {readonly yo: string}; readonly bar: number}
       >
+    >
+  | AssertTrue<
+      IsEqual<Intersection<{a: string} | {b: number}>, {a: string; b: number}>
     >;

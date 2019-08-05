@@ -282,3 +282,9 @@ export type DeepReadonly<T> = T extends Primitive
   : T extends (infer U)[]
   ? ReadonlyArray<__DeepReadonly<U>>
   : __DeepReadonly<T>;
+
+export type Intersection<TUnion> = (TUnion extends any
+  ? (_: TUnion) => void
+  : never) extends ((_: infer T) => void)
+  ? T
+  : never;
