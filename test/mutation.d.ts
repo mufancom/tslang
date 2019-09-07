@@ -23,6 +23,7 @@ import {
   ValueOfKey,
   ValueWithType,
   Intersection,
+  Flatten,
 } from '../library';
 
 interface TestObject {
@@ -84,8 +85,8 @@ type _ =
   | AssertTrue<
       IsEqual<
         ValueNotContainingType<
-          {foo: string; bar: number; pia: TestObject},
-          string & number
+          {foo: {x: 'abc'}; bar: {y: 'def'}; pia: TestObject},
+          {x: 'abc'} & {y: 'def'}
         >,
         TestObject
       >
@@ -141,4 +142,13 @@ type _ =
     >
   | AssertTrue<
       IsEqual<Intersection<{a: string} | {b: number}>, {a: string; b: number}>
+    >
+  | AssertTrue<
+      IsEqual<
+        Flatten<
+          | {a: string; c: string; d?: boolean}
+          | {b: number; c: number; d: boolean}
+        >,
+        {a?: string; b?: number; c: string | number; d?: boolean}
+      >
     >;

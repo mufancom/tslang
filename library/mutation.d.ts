@@ -288,3 +288,26 @@ export type Intersection<TUnion> = (TUnion extends any
   : never) extends ((_: infer T) => void)
   ? T
   : never;
+
+type __ObjectUnionNonGeneralKey<TObjectUnion extends object> = Exclude<
+  TObjectUnion extends object ? keyof TObjectUnion : never,
+  keyof TObjectUnion
+>;
+
+type __FlattenObject<
+  TObjectUnion extends object,
+  TGeneralKey extends keyof TObjectUnion = keyof TObjectUnion
+> = {[TKey in TGeneralKey]: TObjectUnion[TKey]} &
+  {
+    [TKey in __ObjectUnionNonGeneralKey<
+      TObjectUnion
+    >]?: TObjectUnion extends object
+      ? TKey extends keyof TObjectUnion
+        ? TObjectUnion[TKey]
+        : never
+      : never
+  };
+
+export type Flatten<TUnion> =
+  | __FlattenObject<Extract<TUnion, object>>
+  | (Exclude<TUnion, object>);
