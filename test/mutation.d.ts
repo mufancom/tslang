@@ -2,6 +2,8 @@ import {
   AssertTrue,
   DeepReadonly,
   Default,
+  Flatten,
+  Intersection,
   IsEqual,
   KeepValueContainingType,
   KeepValueOfKey,
@@ -22,8 +24,6 @@ import {
   ValueNotWithType,
   ValueOfKey,
   ValueWithType,
-  Intersection,
-  Flatten,
 } from '../library';
 
 interface TestObject {
@@ -136,8 +136,12 @@ type _ =
   | AssertTrue<IsEqual<PromiseType<Promise<number>>, number>>
   | AssertTrue<
       IsEqual<
-        DeepReadonly<{foo: {yo: string}; bar: number}>,
-        {readonly foo: {readonly yo: string}; readonly bar: number}
+        DeepReadonly<{foo: {yo: string}; bar: number; pia: {ha: string}[]}>,
+        {
+          readonly foo: {readonly yo: string};
+          readonly bar: number;
+          readonly pia: readonly {readonly ha: string}[];
+        }
       >
     >
   | AssertTrue<

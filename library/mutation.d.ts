@@ -223,7 +223,7 @@ export type KeepValueWithType<
   TDistributeUnion extends boolean = true
 > = TDistributeUnion extends true
   ? TObject extends object
-    ? {[K in KeyOfValueWithType<TObject, TValue, true>]: TObject[K]}
+    ? {[K in KeyOfValueWithType<TObject, TValue>]: TObject[K]}
     : never
   : {[K in KeyOfValueWithType<TObject, TValue, false>]: TObject[K]};
 
@@ -233,7 +233,7 @@ export type OmitValueWithType<
   TDistributeUnion extends boolean = true
 > = TDistributeUnion extends true
   ? TObject extends object
-    ? {[K in KeyOfValueNotWithType<TObject, TValue, true>]: TObject[K]}
+    ? {[K in KeyOfValueNotWithType<TObject, TValue>]: TObject[K]}
     : never
   : {[K in KeyOfValueNotWithType<TObject, TValue, false>]: TObject[K]};
 
@@ -243,7 +243,7 @@ export type KeepValueContainingType<
   TDistributeUnion extends boolean = true
 > = TDistributeUnion extends true
   ? TObject extends object
-    ? {[K in KeyOfValueContainingType<TObject, TValue, true>]: TObject[K]}
+    ? {[K in KeyOfValueContainingType<TObject, TValue>]: TObject[K]}
     : never
   : {[K in KeyOfValueContainingType<TObject, TValue, false>]: TObject[K]};
 
@@ -253,7 +253,7 @@ export type OmitValueContainingType<
   TDistributeUnion extends boolean = true
 > = TDistributeUnion extends true
   ? TObject extends object
-    ? {[K in KeyOfValueNotContainingType<TObject, TValue, true>]: TObject[K]}
+    ? {[K in KeyOfValueNotContainingType<TObject, TValue>]: TObject[K]}
     : never
   : {[K in KeyOfValueNotContainingType<TObject, TValue, false>]: TObject[K]};
 
@@ -275,13 +275,7 @@ export type PromiseType<
   TPromise extends Promise<any>
 > = TPromise extends Promise<infer T> ? T : never;
 
-type __DeepReadonly<T> = {readonly [P in keyof T]: DeepReadonly<T[P]>};
-
-export type DeepReadonly<T> = T extends Primitive
-  ? T
-  : T extends (infer U)[]
-  ? ReadonlyArray<__DeepReadonly<U>>
-  : __DeepReadonly<T>;
+export type DeepReadonly<T> = {readonly [P in keyof T]: DeepReadonly<T[P]>};
 
 export type Intersection<TUnion> = (TUnion extends any
   ? (_: TUnion) => void
