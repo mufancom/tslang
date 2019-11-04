@@ -16,6 +16,7 @@ import {
   OmitValueOfKey,
   OmitValueWithType,
   OptionalizeUndefined,
+  OptionalizeUndefinedDeep,
   Primitive,
   PromiseType,
   ValueContainingType,
@@ -129,6 +130,12 @@ type _ =
       IsEqual<
         OptionalizeUndefined<{foo: string; bar: string | undefined}>,
         {foo: string; bar?: string | undefined}
+      >
+    >
+  | AssertTrue<
+      IsEqual<
+        OptionalizeUndefinedDeep<{foo: string; bar: string | undefined; ha: {yo: string | undefined}}>,
+        {foo: string; bar?: string | undefined; ha: {yo?: string}}
       >
     >
   | AssertTrue<IsEqual<Default<string, number>, string>>

@@ -265,6 +265,20 @@ export type OptionalizeUndefined<
 > = Partial<KeepValueContainingType<TObject, undefined, TDistributeUnion>> &
   OmitValueContainingType<TObject, undefined, TDistributeUnion>;
 
+export type OptionalizeUndefinedDeep<T> = T extends object
+  ? {
+      [K in KeyOfValueContainingType<T, undefined>]?: OptionalizeUndefinedDeep<
+        T[K]
+      >
+    } &
+      {
+        [K in KeyOfValueNotContainingType<
+          T,
+          undefined
+        >]: OptionalizeUndefinedDeep<T[K]>
+      }
+  : T;
+
 // Miscellaneous
 
 export type Default<T, TDefault> = IsEqual<T, never> extends true
