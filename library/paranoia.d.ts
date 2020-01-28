@@ -1,9 +1,8 @@
-// tslint:disable: interface-over-type-literal
-
 import {Primitive} from './types';
 
 declare const __type: unique symbol;
 
+// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 type __Type<T> = {
   [__type]: T;
 };

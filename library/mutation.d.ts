@@ -269,13 +269,13 @@ export type OptionalizeUndefinedDeep<T> = T extends object
   ? {
       [K in KeyOfValueContainingType<T, undefined>]?: OptionalizeUndefinedDeep<
         T[K]
-      >
+      >;
     } &
       {
         [K in KeyOfValueNotContainingType<
           T,
           undefined
-        >]: OptionalizeUndefinedDeep<T[K]>
+        >]: OptionalizeUndefinedDeep<T[K]>;
       }
   : T;
 
@@ -292,8 +292,8 @@ export type PromiseType<
 export type DeepReadonly<T> = {readonly [P in keyof T]: DeepReadonly<T[P]>};
 
 export type Intersection<TUnion> = (TUnion extends any
-  ? (_: TUnion) => void
-  : never) extends ((_: infer T) => void)
+? (_: TUnion) => void
+: never) extends (_: infer T) => void
   ? T
   : never;
 
@@ -313,9 +313,9 @@ type __FlattenObject<
       ? TKey extends keyof TObjectUnion
         ? TObjectUnion[TKey]
         : never
-      : never
+      : never;
   };
 
 export type Flatten<TUnion> =
   | __FlattenObject<Extract<TUnion, object>>
-  | (Exclude<TUnion, object>);
+  | Exclude<TUnion, object>;

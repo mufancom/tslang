@@ -134,7 +134,11 @@ type _ =
     >
   | AssertTrue<
       IsEqual<
-        OptionalizeUndefinedDeep<{foo: string; bar: string | undefined; ha: {yo: string | undefined}}>,
+        OptionalizeUndefinedDeep<{
+          foo: string;
+          bar: string | undefined;
+          ha: {yo: string | undefined};
+        }>,
         {foo: string; bar?: string | undefined; ha: {yo?: string}}
       >
     >

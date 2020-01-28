@@ -6,7 +6,10 @@
   "types": "library/index.d.ts",
   "main": "library/index.js",
   "scripts": {
-    "lint": "yarn tslint -p library && yarn tslint -p test",
+    "lint:library": "eslint library --ext .ts,.tsx --max-warnings 0",
+    "lint:test": "eslint test --ext .ts,.tsx --max-warnings 0",
+    "lint-prettier": "prettier --list-different \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "lint": "yarn lint-prettier && yarn lint:library && yarn lint:test",
     "test": "yarn tsc -p library && yarn tsc -p test"
   },
   "files": [
@@ -14,10 +17,11 @@
     "library/index.js"
   ],
   "devDependencies": {
-    "@magicspace/configs": "^0.1.49",
-    "prettier": "^1.17.1",
-    "tslint": "^5.17.0",
-    "typescript": "^3.5.1",
-    "typescript-tslint-plugin": "^0.4.0"
+    "@magicspace/configs": "^0.2.3",
+    "@magicspace/eslint-plugin": "^0.1.15",
+    "eslint": "^6.8.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1",
+    "typescript": "^3.7.5"
   }
 }
