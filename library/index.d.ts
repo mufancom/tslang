@@ -15,5 +15,5 @@ export * from './mutation';
  */
 export function mixin(
   targetConstructor: Constructor,
-  ...constructors: Constructor[]
+  constructors: Constructor[],
 ): void;

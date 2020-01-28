@@ -10,7 +10,7 @@
  * @param targetConstructor {Constructor}
  * @param constructors {Constructor[]}
  */
-exports.mixin = function mixin(targetConstructor, ...constructors) {
+exports.mixin = function mixin(targetConstructor, constructors) {
   let targetPrototype = targetConstructor.prototype;
 
   for (let constructor of constructors) {
