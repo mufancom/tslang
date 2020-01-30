@@ -7,18 +7,21 @@
  */
 
 /**
- * @param targetConstructor {Constructor}
  * @param constructors {Constructor[]}
+ * @returns {ClassDecorator}
  */
-exports.mixin = function mixin(targetConstructor, constructors) {
-  let targetPrototype = targetConstructor.prototype;
+exports.mixin = function mixin(constructors) {
+  return targetConstructor => {
+    let targetPrototype = targetConstructor.prototype;
 
-  for (let constructor of constructors) {
-    let prototype = constructor.prototype;
+    for (let constructor of constructors) {
+      let prototype = constructor.prototype;
 
-    Object.defineProperties(
-      targetPrototype,
-      Object.getOwnPropertyDescriptors(prototype),
-    );
-  }
+      let descriptors = Object.getOwnPropertyDescriptors(prototype);
+
+      delete descriptors.constructor;
+
+      Object.defineProperties(targetPrototype, descriptors);
+    }
+  };
 };

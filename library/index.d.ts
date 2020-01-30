@@ -7,13 +7,11 @@ export * from './paranoia';
 export * from './mutation';
 
 /**
- * https://www.typescriptlang.org/docs/handbook/mixins.html
- * @param targetConstructor Target constructor of which the prototype will be
- * applied with properties from other constructors.
+ * Mixin class decorator, applies properties from other class to the decorator
+ * target. You still need to use declaration merging to merge mixin interface
+ * with the target class.
+ *
  * @param constructors Constructors of which the properties will be applied to
  * the target constructor.
  */
-export function mixin(
-  targetConstructor: Constructor,
-  constructors: Constructor[],
-): void;
+export function mixin(constructors: Function[]): ClassDecorator;
