@@ -17,6 +17,7 @@ import {
   OmitValueWithType,
   OptionalizeUndefined,
   OptionalizeUndefinedDeep,
+  PartialByKey,
   Primitive,
   PromiseType,
   ValueContainingType,
@@ -165,5 +166,11 @@ type _ =
           | {b: number; c: number; d: boolean}
         >,
         {a?: string; b?: number; c: string | number; d?: boolean}
+      >
+    >
+  | AssertTrue<
+      IsEqual<
+        PartialByKey<{a: string; b: number; c: boolean}, 'a'>,
+        {a?: string; b: number; c: boolean}
       >
     >;
