@@ -319,3 +319,8 @@ type __FlattenObject<
 export type Flatten<TUnion> =
   | __FlattenObject<Extract<TUnion, object>>
   | Exclude<TUnion, object>;
+
+export type PartialByKey<
+  TObject extends object,
+  TKey extends keyof TObject
+> = Omit<TObject, TKey> & Partial<Pick<TObject, TKey>>;
