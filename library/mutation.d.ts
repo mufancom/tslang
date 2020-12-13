@@ -1,5 +1,4 @@
 import {IsEqual} from './comparison';
-import {Primitive} from './types';
 
 // Extract keys
 
@@ -322,3 +321,5 @@ export type PartialByKey<
   TObject extends object,
   TKey extends keyof TObject
 > = Omit<TObject, TKey> & Partial<Pick<TObject, TKey>>;
+
+export type DeepPartial<T> = {[P in keyof T]?: DeepPartial<T[P]>};

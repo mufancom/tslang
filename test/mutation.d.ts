@@ -1,5 +1,6 @@
 import {
   AssertTrue,
+  DeepPartial,
   DeepReadonly,
   Default,
   Flatten,
@@ -18,7 +19,6 @@ import {
   OptionalizeUndefined,
   OptionalizeUndefinedDeep,
   PartialByKey,
-  Primitive,
   PromiseType,
   ValueContainingType,
   ValueNotContainingType,
@@ -172,5 +172,11 @@ type _ =
       IsEqual<
         PartialByKey<{a: string; b: number; c: boolean}, 'a'>,
         {a?: string; b: number; c: boolean}
+      >
+    >
+  | AssertTrue<
+      IsEqual<
+        DeepPartial<{a: string; b: {e: string; f: number}; c: boolean}>,
+        {a?: string; b?: {e?: string; f?: number}; c?: boolean}
       >
     >;
