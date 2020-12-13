@@ -1,2 +1,3 @@
-package.json
-lerna.json
+# TypeScript Build Artifacts
+bld/
+.bld-cache/

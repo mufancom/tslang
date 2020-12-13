@@ -291,9 +291,9 @@ export type PromiseType<
 
 export type DeepReadonly<T> = {readonly [P in keyof T]: DeepReadonly<T[P]>};
 
-export type Intersection<TUnion> = (TUnion extends any
-? (_: TUnion) => void
-: never) extends (_: infer T) => void
+export type Intersection<TUnion> = (
+  TUnion extends any ? (_: TUnion) => void : never
+) extends (_: infer T) => void
   ? T
   : never;
 
@@ -307,9 +307,7 @@ type __FlattenObject<
   TGeneralKey extends keyof TObjectUnion = keyof TObjectUnion
 > = {[TKey in TGeneralKey]: TObjectUnion[TKey]} &
   {
-    [TKey in __ObjectUnionNonGeneralKey<
-      TObjectUnion
-    >]?: TObjectUnion extends object
+    [TKey in __ObjectUnionNonGeneralKey<TObjectUnion>]?: TObjectUnion extends object
       ? TKey extends keyof TObjectUnion
         ? TObjectUnion[TKey]
         : never

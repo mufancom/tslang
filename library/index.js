@@ -1,5 +1,3 @@
-/* eslint-disable @magicspace/scoped-modules */
-
 // @ts-check
 
 /**

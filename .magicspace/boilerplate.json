@@ -1,0 +1,21 @@
+{
+  "extends": "@mufan/code-boilerplates/typescript",
+  "options": {
+    "name": "tslang",
+    "description": "TypeScript Language Type Utilities.",
+    "license": "MIT",
+    "author": "Chengdu Mufan Technology Co., Ltd.",
+    "tsProjects": [
+      {
+        "name": "library",
+        "src": false,
+        "noEmit": true
+      },
+      {
+        "name": "test",
+        "src": false,
+        "noEmit": true
+      }
+    ]
+  }
+}

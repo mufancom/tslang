@@ -1,0 +1,11 @@
+{
+  "references": [
+    {
+      "path": "library"
+    },
+    {
+      "path": "test"
+    }
+  ],
+  "files": []
+}

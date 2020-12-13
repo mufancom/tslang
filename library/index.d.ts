@@ -1,5 +1,3 @@
-import {Constructor} from './types';
-
 export * from './assertion';
 export * from './comparison';
 export * from './types';
@@ -14,4 +12,5 @@ export * from './mutation';
  * @param constructors Constructors of which the properties will be applied to
  * the target constructor.
  */
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function mixin(constructors: Function[]): ClassDecorator;
