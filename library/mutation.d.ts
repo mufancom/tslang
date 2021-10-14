@@ -1,4 +1,5 @@
 import {IsEqual} from './comparison';
+import {Primitive} from './types';
 
 // Extract keys
 
@@ -264,7 +265,9 @@ export type OptionalizeUndefined<
 > = Partial<KeepValueContainingType<TObject, undefined, TDistributeUnion>> &
   OmitValueContainingType<TObject, undefined, TDistributeUnion>;
 
-export type OptionalizeUndefinedDeep<T> = T extends object
+export type OptionalizeUndefinedDeep<T> = T extends Primitive
+  ? T
+  : T extends object
   ? {
       [K in KeyOfValueContainingType<T, undefined>]?: OptionalizeUndefinedDeep<
         T[K]
