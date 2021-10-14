@@ -20,6 +20,7 @@ import {
   OptionalizeUndefinedDeep,
   PartialByKey,
   PromiseType,
+  ReplaceString,
   ValueContainingType,
   ValueNotContainingType,
   ValueNotOfKey,
@@ -142,6 +143,16 @@ type _ =
         }>,
         {foo: string; bar?: string | undefined; ha: {yo?: string}}
       >
+    >
+  | AssertTrue<
+      IsEqual<ReplaceString<'foobaryoha', 'bar', 'barbara'>, 'foobarbarayoha'>
+    >
+  | AssertTrue<IsEqual<ReplaceString<'foobaryoha', 'foo', ''>, 'baryoha'>>
+  | AssertTrue<
+      IsEqual<ReplaceString<'foobaryoha', 'yoha', 'yoda'>, 'foobaryoda'>
+    >
+  | AssertTrue<
+      IsEqual<ReplaceString<'foobaryoha', 'biu', 'biubiu'>, 'foobaryoha'>
     >
   | AssertTrue<IsEqual<Default<string, number>, string>>
   | AssertTrue<IsEqual<Default<never, number>, number>>

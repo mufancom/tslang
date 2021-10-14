@@ -280,6 +280,20 @@ export type OptionalizeUndefinedDeep<T> = T extends Primitive
     }
   : T;
 
+// String
+
+type ReplaceString<
+  T extends string,
+  TSearch extends string,
+  TReplace extends string,
+> = T extends `${infer TBefore}${TSearch}${infer TAfter}`
+  ? `${ReplaceString<TBefore, TSearch, TReplace>}${TReplace}${ReplaceString<
+      TAfter,
+      TSearch,
+      TReplace
+    >}`
+  : T;
+
 // Miscellaneous
 
 export type Default<T, TDefault> = IsEqual<T, never> extends true
