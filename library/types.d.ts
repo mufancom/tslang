@@ -1,4 +1,11 @@
-export type Primitive = undefined | null | boolean | string | number | symbol;
+export type Primitive =
+  | undefined
+  | null
+  | boolean
+  | string
+  | number
+  | bigint
+  | symbol;
 
 export interface Dict<T> {
   [K: string]: T;
