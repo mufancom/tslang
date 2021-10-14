@@ -5,7 +5,7 @@ import {IsEqual} from './comparison';
 type __KeyOfValueWithType<
   TObject extends object,
   TKey extends keyof TObject,
-  TValue
+  TValue,
 > = TKey extends keyof TObject
   ? TObject[TKey] extends TValue
     ? TKey
@@ -15,7 +15,7 @@ type __KeyOfValueWithType<
 export type KeyOfValueWithType<
   TObject extends object,
   TValue,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? __KeyOfValueWithType<TObject, keyof TObject, TValue>
@@ -25,7 +25,7 @@ export type KeyOfValueWithType<
 type __KeyOfValueNotWithType<
   TObject extends object,
   TKey extends keyof TObject,
-  TValue
+  TValue,
 > = TKey extends keyof TObject
   ? TObject[TKey] extends TValue
     ? never
@@ -35,7 +35,7 @@ type __KeyOfValueNotWithType<
 export type KeyOfValueNotWithType<
   TObject extends object,
   TValue,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? __KeyOfValueNotWithType<TObject, keyof TObject, TValue>
@@ -45,7 +45,7 @@ export type KeyOfValueNotWithType<
 export type KeyOfUnionValueNotWithType<
   TObject extends object,
   TValue,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? __KeyOfValueNotWithType<TObject, keyof TObject, TValue>
@@ -55,7 +55,7 @@ export type KeyOfUnionValueNotWithType<
 type __KeyOfValueContainingType<
   TObject extends object,
   TKey extends keyof TObject,
-  TValue
+  TValue,
 > = TKey extends keyof TObject
   ? TValue extends TObject[TKey]
     ? TKey
@@ -65,7 +65,7 @@ type __KeyOfValueContainingType<
 export type KeyOfValueContainingType<
   TObject extends object,
   TValue,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? __KeyOfValueContainingType<TObject, keyof TObject, TValue>
@@ -75,7 +75,7 @@ export type KeyOfValueContainingType<
 type __KeyOfValueNotContainingType<
   TObject extends object,
   TKey extends keyof TObject,
-  TValue
+  TValue,
 > = TKey extends keyof TObject
   ? TValue extends TObject[TKey]
     ? never
@@ -85,7 +85,7 @@ type __KeyOfValueNotContainingType<
 export type KeyOfValueNotContainingType<
   TObject extends object,
   TValue,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? __KeyOfValueNotContainingType<TObject, keyof TObject, TValue>
@@ -97,7 +97,7 @@ export type KeyOfValueNotContainingType<
 type __ValueWithType<
   TObject extends object,
   TKey extends keyof TObject,
-  TValue
+  TValue,
 > = TKey extends keyof TObject
   ? TObject[TKey] extends TValue
     ? TObject[TKey]
@@ -107,7 +107,7 @@ type __ValueWithType<
 export type ValueWithType<
   TObject extends object,
   TValue,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? __ValueWithType<TObject, keyof TObject, TValue>
@@ -117,7 +117,7 @@ export type ValueWithType<
 type __ValueNotWithType<
   TObject extends object,
   TKey extends keyof TObject,
-  TValue
+  TValue,
 > = TKey extends keyof TObject
   ? TObject[TKey] extends TValue
     ? never
@@ -127,7 +127,7 @@ type __ValueNotWithType<
 export type ValueNotWithType<
   TObject extends object,
   TValue,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? __ValueNotWithType<TObject, keyof TObject, TValue>
@@ -137,7 +137,7 @@ export type ValueNotWithType<
 type __ValueContainingType<
   TObject extends object,
   TKey extends keyof TObject,
-  TValue
+  TValue,
 > = TKey extends keyof TObject
   ? TValue extends TObject[TKey]
     ? TObject[TKey]
@@ -147,7 +147,7 @@ type __ValueContainingType<
 export type ValueContainingType<
   TObject extends object,
   TValue,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? __ValueContainingType<TObject, keyof TObject, TValue>
@@ -157,7 +157,7 @@ export type ValueContainingType<
 type __ValueNotContainingType<
   TObject extends object,
   TKey extends keyof TObject,
-  TValue
+  TValue,
 > = TKey extends keyof TObject
   ? TValue extends TObject[TKey]
     ? never
@@ -167,7 +167,7 @@ type __ValueNotContainingType<
 export type ValueNotContainingType<
   TObject extends object,
   TValue,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? __ValueNotContainingType<TObject, keyof TObject, TValue>
@@ -177,7 +177,7 @@ export type ValueNotContainingType<
 export type ValueOfKey<
   TObject extends object,
   TKey extends keyof TObject,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? TKey extends keyof TObject
@@ -189,7 +189,7 @@ export type ValueOfKey<
 export type ValueNotOfKey<
   TObject extends object,
   TKey extends keyof TObject,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = ValueOfKey<TObject, Exclude<keyof TObject, TKey>, TDistributeUnion>;
 
 // Keep or omit values by keys
@@ -197,7 +197,7 @@ export type ValueNotOfKey<
 export type KeepValueOfKey<
   TObject extends object,
   TKey extends keyof TObject,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? Pick<TObject, Extract<keyof TObject, TKey>>
@@ -207,7 +207,7 @@ export type KeepValueOfKey<
 export type OmitValueOfKey<
   TObject extends object,
   TKey extends keyof TObject,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? Pick<TObject, Exclude<keyof TObject, TKey>>
@@ -219,7 +219,7 @@ export type OmitValueOfKey<
 export type KeepValueWithType<
   TObject extends object,
   TValue,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? {[K in KeyOfValueWithType<TObject, TValue>]: TObject[K]}
@@ -229,7 +229,7 @@ export type KeepValueWithType<
 export type OmitValueWithType<
   TObject extends object,
   TValue,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? {[K in KeyOfValueNotWithType<TObject, TValue>]: TObject[K]}
@@ -239,7 +239,7 @@ export type OmitValueWithType<
 export type KeepValueContainingType<
   TObject extends object,
   TValue,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? {[K in KeyOfValueContainingType<TObject, TValue>]: TObject[K]}
@@ -249,7 +249,7 @@ export type KeepValueContainingType<
 export type OmitValueContainingType<
   TObject extends object,
   TValue,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = TDistributeUnion extends true
   ? TObject extends object
     ? {[K in KeyOfValueNotContainingType<TObject, TValue>]: TObject[K]}
@@ -260,7 +260,7 @@ export type OmitValueContainingType<
 
 export type OptionalizeUndefined<
   TObject extends object,
-  TDistributeUnion extends boolean = true
+  TDistributeUnion extends boolean = true,
 > = Partial<KeepValueContainingType<TObject, undefined, TDistributeUnion>> &
   OmitValueContainingType<TObject, undefined, TDistributeUnion>;
 
@@ -269,13 +269,12 @@ export type OptionalizeUndefinedDeep<T> = T extends object
       [K in KeyOfValueContainingType<T, undefined>]?: OptionalizeUndefinedDeep<
         T[K]
       >;
-    } &
-      {
-        [K in KeyOfValueNotContainingType<
-          T,
-          undefined
-        >]: OptionalizeUndefinedDeep<T[K]>;
-      }
+    } & {
+      [K in KeyOfValueNotContainingType<
+        T,
+        undefined
+      >]: OptionalizeUndefinedDeep<T[K]>;
+    }
   : T;
 
 // Miscellaneous
@@ -284,9 +283,8 @@ export type Default<T, TDefault> = IsEqual<T, never> extends true
   ? TDefault
   : T;
 
-export type PromiseType<
-  TPromise extends Promise<any>
-> = TPromise extends Promise<infer T> ? T : never;
+export type PromiseType<TPromise extends Promise<any>> =
+  TPromise extends Promise<infer T> ? T : never;
 
 export type DeepReadonly<T> = {readonly [P in keyof T]: DeepReadonly<T[P]>};
 
@@ -303,15 +301,14 @@ type __ObjectUnionNonGeneralKey<TObjectUnion extends object> = Exclude<
 
 type __FlattenObject<
   TObjectUnion extends object,
-  TGeneralKey extends keyof TObjectUnion = keyof TObjectUnion
-> = {[TKey in TGeneralKey]: TObjectUnion[TKey]} &
-  {
-    [TKey in __ObjectUnionNonGeneralKey<TObjectUnion>]?: TObjectUnion extends object
-      ? TKey extends keyof TObjectUnion
-        ? TObjectUnion[TKey]
-        : never
-      : never;
-  };
+  TGeneralKey extends keyof TObjectUnion = keyof TObjectUnion,
+> = {[TKey in TGeneralKey]: TObjectUnion[TKey]} & {
+  [TKey in __ObjectUnionNonGeneralKey<TObjectUnion>]?: TObjectUnion extends object
+    ? TKey extends keyof TObjectUnion
+      ? TObjectUnion[TKey]
+      : never
+    : never;
+};
 
 export type Flatten<TUnion> =
   | __FlattenObject<Extract<TUnion, object>>
@@ -319,7 +316,7 @@ export type Flatten<TUnion> =
 
 export type PartialByKey<
   TObject extends object,
-  TKey extends keyof TObject
+  TKey extends keyof TObject,
 > = Omit<TObject, TKey> & Partial<Pick<TObject, TKey>>;
 
 export type DeepPartial<T> = {[P in keyof T]?: DeepPartial<T[P]>};

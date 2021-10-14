@@ -17,7 +17,5 @@
     "typescript",
     "typescriptreact"
   ],
-  "cSpell.words": [
-    "Optionalize"
-  ]
+  "cSpell.words": ["Optionalize"]
 }
