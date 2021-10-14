@@ -282,7 +282,7 @@ export type OptionalizeUndefinedDeep<T> = T extends Primitive
 
 // String
 
-type ReplaceString<
+export type ReplaceString<
   T extends string,
   TSearch extends string,
   TReplace extends string,
