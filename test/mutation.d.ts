@@ -139,9 +139,13 @@ type _ =
         OptionalizeUndefinedDeep<{
           foo: string;
           bar: string | undefined;
-          ha: {yo: string | undefined};
+          ha: {yo: string | undefined; yoyo: string[]};
         }>,
-        {foo: string; bar?: string | undefined; ha: {yo?: string}}
+        {
+          foo: string;
+          bar?: string | undefined;
+          ha: {yo?: string; yoyo: string[]};
+        }
       >
     >
   | AssertTrue<
