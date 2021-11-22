@@ -1,3 +1,3 @@
-export type AssertTrue<T extends true> = any;
+export type AssertTrue<_T extends true> = any;
 
-export type AssertFalse<T extends false> = any;
+export type AssertFalse<_T extends false> = any;

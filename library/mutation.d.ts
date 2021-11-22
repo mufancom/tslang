@@ -1,5 +1,5 @@
 import {IsEqual} from './comparison';
-import {PlainObject, Primitive} from './types';
+import {PlainObject} from './types';
 
 // Extract keys
 
