@@ -266,16 +266,12 @@ export type OptionalizeUndefined<
   OmitValueContainingType<TObject, undefined, TDistributeUnion>;
 
 export type OptionalizeUndefinedDeep<T> = T extends PlainObject
-  ? {
-      [K in KeyOfValueContainingType<T, undefined>]?: OptionalizeUndefinedDeep<
-        T[K]
-      >;
-    } & {
-      [K in KeyOfValueNotContainingType<
-        T,
-        undefined
-      >]: OptionalizeUndefinedDeep<T[K]>;
-    }
+  ? PartialByKey<
+      {
+        [K in keyof T]: OptionalizeUndefinedDeep<T[K]>;
+      },
+      KeyOfValueContainingType<T, undefined>
+    >
   : T;
 
 // String
